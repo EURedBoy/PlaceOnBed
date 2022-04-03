@@ -1,0 +1,5 @@
+name: PlaceOnBed
+version: '${project.version}'
+main: me.red.Main
+authors: [ Red ]
+description: Place block on bed without shift 
