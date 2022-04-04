@@ -17,7 +17,6 @@ import java.util.List;
 
 public class onPlaceBlockListener implements Listener {
     private Main plugin;
-    protected List<Location> locations = new ArrayList<>();
 
     public onPlaceBlockListener(Main plugin) {
         this.plugin = plugin;
@@ -31,23 +30,21 @@ public class onPlaceBlockListener implements Listener {
             if (e.getItem().getType().isBlock() && e.getBlockFace().equals(BlockFace.UP)){
 
                 Location Bloc = e.getClickedBlock().getLocation().add(0,1,0);
-                Material material = e.getItem().getType();
+                ItemStack item = e.getItem();
 
                 if (Bloc.getBlock().isEmpty() && !(checkPos(Bloc))) {
 
-                    if (material.equals(Material.WOOL)){
-                        DyeColor color = DyeColor.getByWoolData(material.);
-                        Wool wool = new Wool(color);
-                        Bloc.getBlock().setType(wool.getItemType());
+                    if (item.getType().equals(Material.WOOL)){
+                        Bloc.getBlock().setType(Material.WOOL);
+                        Bloc.getBlock().setData((byte) item.getDurability());
                     }else{
-                        Bloc.getBlock().setType(block.getType());
+                        Bloc.getBlock().setType(item.getType());
                     }
 
-                    ItemStack item = e.getPlayer().getItemInHand();
-                    locations.add(Bloc);
+                    ItemStack itemHand = e.getPlayer().getItemInHand();
 
                     if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
-                        e.getPlayer().getItemInHand().setAmount(item.getAmount() - 1);
+                        e.getPlayer().getItemInHand().setAmount(itemHand.getAmount() - 1);
                     }
                 }
             }

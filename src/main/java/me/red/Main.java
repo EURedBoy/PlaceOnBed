@@ -1,5 +1,6 @@
 package me.red;
 
+import me.red.listener.onBlockBreakListener;
 import me.red.listener.onPlaceBlockListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -9,6 +10,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new onPlaceBlockListener(this),this);
+        getServer().getPluginManager().registerEvents(new onBlockBreakListener(),this);
 
         saveDefaultConfig();
 
