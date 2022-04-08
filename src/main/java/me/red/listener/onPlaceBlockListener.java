@@ -27,9 +27,27 @@ public class onPlaceBlockListener implements Listener {
         if (!(plugin.getConfig().getBoolean("enable"))) return;
 
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock().getType().equals(Material.BED_BLOCK)){
-            if (e.getItem().getType().isBlock() && e.getBlockFace().equals(BlockFace.UP)){
+            if (e.getItem().getType().isBlock() ){
 
                 Location Bloc = e.getClickedBlock().getLocation().add(0,1,0);
+
+                switch (e.getBlockFace()){
+                    case UP:
+                        Bloc = e.getClickedBlock().getLocation().add(0,1,0);
+                        break;
+                    case NORTH:
+                        Bloc = e.getClickedBlock().getLocation().add(0,0,-1);
+                        break;
+                    case SOUTH:
+                        Bloc = e.getClickedBlock().getLocation().add(0,0,1);
+                        break;
+                    case WEST:
+                        Bloc = e.getClickedBlock().getLocation().add(-1,0,0);
+                        break;
+                    case EAST:
+                        Bloc = e.getClickedBlock().getLocation().add(1,0,0);
+                        break;
+                }
                 ItemStack item = e.getItem();
 
                 if (Bloc.getBlock().isEmpty() && !(checkPos(Bloc))) {
